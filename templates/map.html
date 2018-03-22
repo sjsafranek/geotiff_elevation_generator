@@ -44,6 +44,10 @@
 		    <script src="https://leaflet.github.io/Leaflet.draw/src/edit/handler/Edit.Circle.js"></script>
 
 
+			<!-- This is what you need -->
+		    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@latest/dist/sweetalert2.all.min.js"></script>
+
+
 		<style>
 			#map {
 				height:100%;
@@ -118,7 +122,8 @@
 									'zoom': self.map.getZoom()
 								}
 								$.post('http://localhost:3000/api/job', job, function(data) {
-									console.log(job, data);
+									// alert(job, data);
+									swal(JSON.stringify(data));
 								});
 
 							}, 500);

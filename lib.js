@@ -115,7 +115,7 @@ function buildElevationProfile(opts, callback) {
     }
 
     // create temp directory for processing
-    var dir = os.tmpdir() + "/" + randomstring.generate();
+    var dir = os.tmpdir() + "/terrain_RBG__" + randomstring.generate();
     if (!fs.existsSync(dir)){
         fs.mkdirSync(dir);
     }
