@@ -99,6 +99,7 @@ router.post('/job', function (req, res) {
     // TODO
     //  - add job queue
     var job_id = uuid4();
+    // run('/path/to/worker_file')
     var job = Pool.run(worker);
 
     req.body.access_token = access_token;
@@ -111,6 +112,9 @@ router.post('/job', function (req, res) {
     })
     .on('done', function(response) {
         log.info(response);
+    })
+    .on('progress', function(progress) {
+        console.log(`Progress: ${progress}%`);
     })
     .on('error', function(err) {
         log.error(err.message);
@@ -174,4 +178,15 @@ app.get('/map', function (req, res) {
 app.listen(options.port || 3000, function () {
     log.info('Starting', PROJECT.getVersion())
     log.info('Magic happens on port ' + 3000 + '!');
+});
+
+
+process.on('SIGINT', function() {
+  console.log('Gracefully shutting down');
+  // TODO
+  //  - track pending jobs
+  //  - signal end to job -- kill thread
+  //  - remove temp directories
+  Pool.killAll();
+  process.exit();
 });

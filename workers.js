@@ -11,6 +11,7 @@ function worker(input, done, progress) {
 
     input.options.simple = true;
 
+    // progress
     log.info("Recieved job", input);
 
     lib.buildElevationProfile(input.options, function(err) {

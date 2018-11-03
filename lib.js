@@ -91,6 +91,8 @@ function buildElevationProfile(opts, callback) {
 
     var tiles = new Tiles(opts.extent, opts.zoom, "https://api.mapbox.com/v4/mapbox.terrain-rgb/{z}/{x}/{y}.pngraw?access_token=" + opts.access_token);
 
+    console.log(tiles);
+
     var fields = [
         'tile_x',
         'tile_y',
